@@ -8,6 +8,14 @@ BASEDIR = ..
 CC65_DIR ?= ${BASEDIR}/../cc65
 VM6502Q_DIR ?= ${BASEDIR}/../vm6502q
 
+# CPU Override
+TARGET_CPU ?= 6502q
+ifeq (,${TARGET_CPU})
+SET_CC65_CPU =
+else
+SET_CC65_CPU = --cpu ${TARGET_CPU}
+endif
+
 # Tool paths - assumes that 'bin' has been symlink'ed to the cc65/bin
 # directory, and that the 'bin2hex' tool from the vm6502q/ project is present
 # somewhere.
@@ -42,7 +50,7 @@ ${DESTDIR} :
 
 # Compile the source file, and include the additional required assembly files
 ${DESTDIR}/${BASE}.bin : ${EXAMPLE_INPUT} ${COMMON} ${DESTDIR}
-	${CL65} ${CFLAGS} -C ${BASE}.cfg -l ${DESTDIR}/${BASE}.lst -m ${DESTDIR}/${BASE}.map --start-addr 1024 -t none --cpu 6502q -o $@ $< ${COMMON}
+	${CL65} ${CFLAGS} -C ${BASE}.cfg -l ${DESTDIR}/${BASE}.lst -m ${DESTDIR}/${BASE}.map --start-addr 1024 -t none ${SET_CC65_CPU} -o $@ $< ${COMMON}
 	mv *.o ${DESTDIR}
 
 # Convert the generated binary to the vm65 expected format
@@ -55,7 +63,7 @@ ${DESTDIR}/${BASE}.dat : ${DESTDIR}/${BASE}.bin ${DESTDIR}
 
 # Utility command to create an asm version of the source file
 asm : ${DESTDIR}
-	${CC65} ${CFLAGS} ${BASE}.c -o ${DESTDIR}/${BASE}.s
+	${CC65} ${CFLAGS} ${BASE}.c -t none ${SET_CC65_CPU} -o ${DESTDIR}/${BASE}.s
 
 # Run the generated .dat in the vm65 emulator
 run : ${DESTDIR}/${BASE}.dat
