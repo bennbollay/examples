@@ -5,10 +5,10 @@
 ;
 GINIT:	clq
 		ldy #$08
- 		lda #00
-		adc #00 	;clear flags
+ 		lda #$00
+		adc #$00 	;clear flags
 		haa
- GITER:	seq
+GITER:	seq
 		sez
 		clc
 		cmp #$64
@@ -24,8 +24,6 @@ GINIT:	clq
 		sta $0bff
 		brk
 
-; > $1f $a0 $0c $a9 $00 $69 $00 $02 $3f $2b $18 $c9 $64 $02 $f7 $47
-; < $1f $a0 $08 $a9 $00 $69 $00 $02 $3f $2b $18 $c9 $64 $02 $f7 $47
-;           ^^^
+; < $1f $a0 $0c $a9 $00 $69 $00 $02 $3f $2b $18 $c9 $64 $02 $f7 $47
 ; > $02 $1f $88 $d0 $f3 $c9 $64 $d0 $e7 $81 $ff $0b $00 
 ; < $02 $1f $88 $d0 $f3 $c9 $64 $d0 $e7 $8d $ff $0b $00 $00 $00 $00
