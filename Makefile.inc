@@ -74,6 +74,7 @@ run : ${DESTDIR}/${BASE}.dat
 # Remove the entire destination directory to clean the project
 clean :
 	rm -rf ${DESTDIR}
+	rm -rf dummy.rom
 
 .PHONY : all run clean asm
 
