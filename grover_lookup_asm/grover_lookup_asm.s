@@ -6,6 +6,7 @@
 GINIT:	clq
 		ldy #$0c
 		ldx #$00
+		seq
 		hax
 		lda $0f00,X
 		cln
