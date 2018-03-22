@@ -1,3 +1,5 @@
+VM6502Q Examples: [![VM6502Q Examples Build Status](https://api.travis-ci.org/vm6502q/examples.svg?branch=master)](https://travis-ci.org/vm6502q/examples/builds)
+
 A small collection of cc65-compat projects to be used with the vm65 target.
 
 # Usage Guide
