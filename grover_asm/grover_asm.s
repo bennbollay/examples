@@ -3,27 +3,27 @@
 ; perform Grover's search on $0f00 to $0fff
 ; store result in $0bff
 ;
-GINIT:	clq
-		ldy #$08
+GINIT:		clq
+		ldy #$0c
  		lda #$00
-		adc #$00 	;clear flags
+		seq
+		cln
+		clv
 		haa
-GITER:	seq
+GITER:		seq
 		sez
-		clc
 		cmp #$64
-		haa
 		qzz
+		haa
 		clz
 		haa
-		clq
-		dey
+ 		clq
+ 		dey
 		bne GITER
 		cmp #$64
 		bne GINIT
-		sta $0bff
+		stx $0bff
 		brk
 
-; < $1f $a0 $0c $a9 $00 $69 $00 $02 $3f $2b $18 $c9 $64 $02 $f7 $47
-; > $02 $1f $88 $d0 $f3 $c9 $64 $d0 $e7 $81 $ff $0b $00 
-; < $02 $1f $88 $d0 $f3 $c9 $64 $d0 $e7 $8d $ff $0b $00 $00 $00 $00
+; > $1f $a0 $0c $a9 $00 $3f $2f $b8 $02 $3f $2b $c9 $64 $f7 $02 $47
+; < $02 $1f $88 $d0 $f4 $c9 $64 $d0 $e7 $8e $ff $0b $00
